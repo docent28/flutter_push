@@ -25,7 +25,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String millisecondsText = "";
-  int colorButton = 0xFF40CA88;
   GameState gameState = GameState.readyToStart;
   Timer? waitingTimer;
   Timer? stoppableTimer;
@@ -37,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Color(0xFF282E3D),
       body: Stack(children: [
         Align(
-            alignment: const Alignment(0, -0.9),
+            alignment: const Alignment(0, -0.8),
             child: Text(
               "Test your\nreaction speed",
               textAlign: TextAlign.center,
@@ -49,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         Align(
             alignment: Alignment.center,
             child: ColoredBox(
-              color: Color(0xFF6D6D6D),
+              color: const Color(0xFF6D6D6D),
               child: SizedBox(
                 height: 160,
                 width: 300,
@@ -66,13 +65,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )),
         Align(
-            alignment: const Alignment(0, 0.9),
+            alignment: const Alignment(0, 0.8),
             child: GestureDetector(
               onTap: () => setState(() {
                 switch (gameState) {
                   case GameState.readyToStart:
                     gameState = GameState.waiting;
-                    colorButton = 0xFFE0982D;
                     millisecondsText = "";
                     _startWaitingTimer();
                     break;
@@ -80,13 +78,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     break;
                   case GameState.canBeStopped:
                     gameState = GameState.readyToStart;
-                    colorButton = 0xFF40CA88;
                     stoppableTimer?.cancel();
                     break;
                 }
               }),
               child: ColoredBox(
-                color: Color(colorButton),
+                color: _getButtonColor(),
                 child: SizedBox(
                   height: 200,
                   width: 200,
@@ -113,8 +110,18 @@ class _MyHomePageState extends State<MyHomePage> {
       case GameState.waiting:
         return "WAIT";
       case GameState.canBeStopped:
-        colorButton = 0xFFE02D47;
         return "STOP";
+    }
+  }
+
+  Color _getButtonColor() {
+    switch (gameState) {
+      case GameState.readyToStart:
+        return const Color(0xFF40CA88);
+      case GameState.waiting:
+        return const Color(0xFFE0982D);
+      case GameState.canBeStopped:
+        return const Color(0xFFE02D47);
     }
   }
 
