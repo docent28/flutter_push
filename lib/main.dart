@@ -32,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+//    double heightTop = MediaQuery.of(context).size.height * MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
       backgroundColor: Color(0xFF282E3D),
       body: Stack(children: [
