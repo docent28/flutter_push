@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF282E3D),
+      backgroundColor: const Color(0xFF282E3D),
       body: Stack(children: [
         Align(
             alignment: const Alignment(0, -0.8),
